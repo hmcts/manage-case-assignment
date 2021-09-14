@@ -30,6 +30,12 @@ public class ApplicationParams {
     private String emailTemplateId;
     @Value("${notify.api-key}")
     private String notifyApiKey;
+    @Value("${role.assignment.api.host}")
+    private String roleAssignmentServiceHost;
+    @Value("#{'${aca.access-control.cross-jurisdictional-roles}'.split(',')}")
+    private List<String> acaAccessControlCrossJurisdictionRoles;
+    @Value("${aca.access-control.caseworker.role.regex}")
+    private String acaAccessControlCaseworkerRoleRegex;
 
     public String getCaaSystemUserId() {
         return caaSystemUserId;
@@ -69,5 +75,21 @@ public class ApplicationParams {
 
     public String getNotifyApiKey() {
         return notifyApiKey;
+    }
+
+    public String roleAssignmentBaseURL() {
+        return roleAssignmentServiceHost + "/am/role-assignments";
+    }
+
+    public String amQueryRoleAssignmentsURL() {
+        return roleAssignmentBaseURL() + "/query";
+    }
+
+    public List<String> getAcaAccessControlCrossJurisdictionRoles() {
+        return acaAccessControlCrossJurisdictionRoles;
+    }
+
+    public String getAcaAccessControlCaseworkerRoleRegex() {
+        return acaAccessControlCaseworkerRoleRegex;
     }
 }
